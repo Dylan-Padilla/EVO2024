@@ -129,12 +129,12 @@ background-image: url("imgs/bg-img.png")
 
 .pull-left[
 <center>
-<img src = "imgs/lynch.png" width = 650 height = 420 />
+<img src = "imgs/lynch.png" width = 650 height = 370 />
 </center>
 ]
 .pull-right[
 <center>
-<img src = "imgs/lynch2.png" width = 650 height = 420 />
+<img src = "imgs/lynch2.png" width = 650 height = 400 />
 </center>
 ]
 
