@@ -1654,6 +1654,7 @@ background-size: cover
 
 <center>
 <font size='10'>Results</font>
+<font size='10'>Temperature v Growth and Cell Size</font>
 <center>
 
 ---
