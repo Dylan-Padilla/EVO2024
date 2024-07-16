@@ -1,5 +1,5 @@
 ---
-title: "Larger prokaryotes grow faster only at high tempratures"
+title: "Larger prokaryotes grow faster only at high temperatures"
 subtitle: "Dylan Padilla | `r emo::ji('envelope')` dpadil10@asu.edu<br>`r emo::ji('link')` https://dylanpadilla.netlify.app/<br>Evolution 2024<br>"
 output:
   xaringan::moon_reader:
@@ -84,7 +84,7 @@ pre[class] {
 
 
 
-```{r, xaringan-slide-tone, echo = TRUE, include = FALSE}
+```{r, xaringan-slide-tone, include = FALSE}
 
 xaringanExtra::use_slide_tone()
 
@@ -125,7 +125,37 @@ background-image: url("imgs/bg-img.png")
 
 ---
 
+# Relationship between growth and size
+
+## Metabolism governs the rate at which organisms transform energy into biological work and growth
+
+---
+
+# Relationship between growth and size
+
+## Metabolism governs the rate at which organisms transform energy into biological work and growth
+
+.pull-left[
+<center>
+<img src = "imgs/elephant.png" width=600 height=480/>
+</center>
+]
+
+--
+
+.pull-right[
 <br><br>
+<center>
+<img src = "imgs/mouse.png" width=200 height=200/>
+</center>
+]
+
+
+---
+
+# Prokaryotes defy theoretical predictions
+
+<br>
 
 .pull-left[
 <center>
@@ -137,11 +167,77 @@ background-image: url("imgs/bg-img.png")
 <img src = "imgs/lynch2.png" width = 650 height = 400 />
 </center>
 ]
+<center>
+Lynch et al., (2022)
+</center>
 
 ---
 
-```{r, include = FALSE}
+# Prokaryotes defy theoretical predictions
 
+<br>
+
+.pull-left[
+<center>
+<img src = "imgs/marshall_2022.png" width = 500 height = 400 /><br>
+Marshall et al., (2022)
+</center>
+]
+
+--
+
+.pull-right[
+<center>
+<img src='https://media1.tenor.com/m/t5xv1FrpIc4AAAAd/pawpaw-thinking.gif' width=400 height=400/>
+</center>
+]
+
+---
+
+# Methods
+
+.pull-left[
+<center>
+<img src = "imgs/repository.png"/><br>
+<img src = "imgs/literature1.png"/>
+</center>
+]
+
+
+.pull-right[
+<center>
+<img src = "imgs/literature2.png"/><br>
+<img src = "imgs/literature3.png"/>
+</center>
+]
+
+---
+
+# Methods
+
+.pull-left[
+
+<br>
+<ul>
+ <li>
+ Minimum doubling time
+ </li>$$(log_{10} h)$$
+ <li>
+ Cell volume
+ </li>$$(log_{10} \mu m^3)$$
+ <li>
+ Cell diameter
+ </li>$$(log_{10} \mu m)$$
+</ul>
+
+]
+
+
+.pull-right[
+
+<center>
+
+```{r, out.width='90%'}
 
 tree <- read.tree("../spp.tree.nwk")
 
@@ -182,8 +278,57 @@ dim(cell.vol)
 names(cell.vol) <- c("species", "volume")
 
 
-```
+## Relationship between diameter and volume
 
+d1_up <- aggregate(spp.d1_up$d1_up, by = list(spp.d1_up$species), mean, na.action = na.rm)
+cell.vol <- aggregate(vol$volume, by = list(vol$species), mean)
+
+
+names(d1_up) <- c("species", "d1_up")
+names(cell.vol) <- c("species", "volume")
+
+
+d1_up$species <- gsub("[[:punct:]]", "", d1_up$species)
+d1_up$species <- gsub(" ", "_", d1_up$species)
+cell.vol$species <- gsub(" ", "_", cell.vol$species)
+
+di.vol <- merge(cell.vol, d1_up, by = "species")
+
+p.cor <- cor.test(log10(di.vol$volume), di.vol$d1_up, method = "pearson")
+
+
+##png("figure3.png", height = 7, width = 7, units = "in", res = 360)
+
+
+plot(log10(volume) ~ d1_up, data = di.vol, pch = 16, las = 1, ylab = expression(paste("Cell volume ", log[10], sep = " ")(mu*m^3)), xlab = expression(paste("Cell diameter ", log[10], sep = " ")(mu*m)), mgp = c(2.6, 1, 0), type = "n", cex = 1.3)
+
+grid(nx = NULL, ny = NULL, col = alpha("lightgray", 0.5), lwd = 1, lty = 2)
+
+par(new = TRUE)
+
+plot(log10(volume) ~ d1_up, data = di.vol, pch = 16, las = 1, ylab = "", xlab = "", mgp = c(2.6, 1, 0), type = "p", axes = FALSE, cex = 1.3)
+
+
+abline(lm(log10(di.vol$volume) ~ di.vol$d1_up), lwd = 2.5)
+legend(x = 0.1, y = 2.3, legend = expression("R"^2==~0.877), bty = "n", cex = 1.1)
+legend(x = 0.1, y = 2.06, legend = expression(p==~0.001), bty = "n", cex = 1.1)
+
+```
+</center>
+
+]
+
+---
+class: center, middle
+background-image: url("imgs/cells.png")
+background-size: cover
+
+
+# Results
+
+# Growth v Cell Size
+
+---
 
 ```{r, include = FALSE}
 
@@ -1032,11 +1177,43 @@ mtext("B", side = 2, at = 2.35, line = 2.9, las = 1, font = 2)
 ]
 
 ---
+
+# Methods
+
+.pull-left[
+
+## Metabolism of protein synthesis
+## "Translation Machinery"
+
+
+<br>
+
+<ul>
+ <li>
+ Number of ribosomal RNA genes (rRNA)
+ </li><br>
+ <li>
+ Number of transfer RNA genes (tRNA)
+ </li>
+</ul>
+
+]
+
+.pull-right[
+
+<center>
+<img src='imgs/translation.png' width=490 height=500/>
+</center>
+
+]
+
+
+---
 class: center, middle
 background-image: url("imgs/ribosomes.jpeg")
 background-size: cover
 
-
+# Results
 # Translation machinery
 
 
@@ -1383,11 +1560,15 @@ class: center, middle
 background-image: url("imgs/temp.jpeg")
 background-size: cover
 
-How does temperature scale with size and growth?
+<br><br>
+
+<center>
+<font size='10'>How does temperature scale with size and growth?</font>
+<center>
 
 ---
 
-
+# Methods
 
 ![](imgs/Kremer, et al., 2017.png)<br>
 
@@ -1397,11 +1578,12 @@ How does temperature scale with size and growth?
  
  </center>
 
-
 ---
 
+# Methods
 
-```{r, out.width = "60%"}
+
+```{r, out.width = "50%"}
 
 set.seed(1)
 thermal <- rnorm(100, 50, 10)
@@ -1414,7 +1596,9 @@ grid(nx = NULL, ny = NULL, col = alpha("lightgray", 0.5), lwd = 1, lty = 2)
 
 ---
 
-```{r, out.width = "60%"}
+# Methods
+
+```{r, out.width = "50%"}
 
 
 plot(density(thermal), type = "l", lwd = 3, las = 1, main = "Thermal performance curve", ylab = "Trait y", xlab = "Temperature", yaxt = "n", xaxt = "n", col = "red", cex = 1.8)
@@ -1427,7 +1611,9 @@ text(20, 0.015, "Lower \n limit")
 
 ---
 
-```{r, out.width = "60%"}
+# Methods
+
+```{r, out.width = "50%"}
 
 plot(density(thermal), type = "l", lwd = 3, las = 1, main = "Thermal performance curve", ylab = "Trait y", xlab = "Temperature", yaxt = "n", xaxt = "n", col = "red", cex = 1.8)
 grid(nx = NULL, ny = NULL, col = alpha("lightgray", 0.5), lwd = 1, lty = 2)
@@ -1440,8 +1626,10 @@ text(80, 0.015, "Upper \n limit")
 
 ---
 
+# Methods
 
-```{r, out.width = "60%"}
+
+```{r, out.width = "50%"}
 
 
 plot(density(thermal), type = "l", lwd = 3, las = 1, main = "Thermal performance curve", ylab = "Trait y", xlab = "Temperature", yaxt = "n", xaxt = "n", col = "red", cex = 1.8)
@@ -1458,47 +1646,19 @@ text(65, 0.038, "Optimum")
 
 
 ---
+class: center, middle
+background-image: url("imgs/temp.jpeg")
+background-size: cover
 
-```{r, out.width = "60%"}
+<br><br>
 
-## Relationship between diameter and volume
-
-d1_up <- aggregate(spp.d1_up$d1_up, by = list(spp.d1_up$species), mean, na.action = na.rm)
-cell.vol <- aggregate(vol$volume, by = list(vol$species), mean)
-
-
-names(d1_up) <- c("species", "d1_up")
-names(cell.vol) <- c("species", "volume")
-
-
-d1_up$species <- gsub("[[:punct:]]", "", d1_up$species)
-d1_up$species <- gsub(" ", "_", d1_up$species)
-cell.vol$species <- gsub(" ", "_", cell.vol$species)
-
-di.vol <- merge(cell.vol, d1_up, by = "species")
-
-p.cor <- cor.test(log10(di.vol$volume), di.vol$d1_up, method = "pearson")
-
-
-##png("figure3.png", height = 7, width = 7, units = "in", res = 360)
-
-
-plot(log10(volume) ~ d1_up, data = di.vol, pch = 16, las = 1, ylab = expression(paste("Cell volume ", log[10], sep = " ")(mu*m^3)), xlab = expression(paste("Cell diameter ", log[10], sep = " ")(mu*m)), mgp = c(2.6, 1, 0), type = "n", cex = 1.3)
-
-grid(nx = NULL, ny = NULL, col = alpha("lightgray", 0.5), lwd = 1, lty = 2)
-
-par(new = TRUE)
-
-plot(log10(volume) ~ d1_up, data = di.vol, pch = 16, las = 1, ylab = "", xlab = "", mgp = c(2.6, 1, 0), type = "p", axes = FALSE, cex = 1.3)
-
-
-abline(lm(log10(di.vol$volume) ~ di.vol$d1_up), lwd = 2.5)
-legend(x = 0.1, y = 2.3, legend = expression("R"^2==~0.877), bty = "n", cex = 1.1)
-legend(x = 0.1, y = 2.06, legend = expression(p==~0.001), bty = "n", cex = 1.1)
-
-```
+<center>
+<font size='10'>Results</font>
+<center>
 
 ---
+
+<br>
 
 ```{r, include = FALSE}
 
@@ -1720,8 +1880,6 @@ name.check(tree.tmp.lower.growth, tmp.lower.dat.growth)
 ```
 
 
-
-
 ```{r}
 
 
@@ -1781,6 +1939,7 @@ legend("topleft", legend = levels(as.factor((tmp.lower.dat$kingdom))), pch = 16,
 
 ---
 
+<br>
 
 
 ```{r}
@@ -1889,7 +2048,7 @@ legend("topleft", legend = levels(as.factor((tmp.op.dat$kingdom))), pch = 16, co
 ---
 
 
-
+<br>
 
 ```{r}
 
@@ -2040,7 +2199,7 @@ legend("topleft", legend = levels(as.factor((tmp.upper.dat$kingdom))), pch = 16,
 
 ---
 
-
+<br>
 
 ```{r}
 
@@ -2097,6 +2256,7 @@ legend("bottomleft", legend = levels(as.factor((tmp.lower.dat.growth$kingdom))),
 
 ---
 
+<br>
 
 ```{r}
 
@@ -2193,6 +2353,8 @@ legend("bottomleft", legend = levels(as.factor((tmp.op.dat.growth$kingdom))), pc
 
 
 ---
+
+<br>
 
 
 ```{r}
@@ -2329,6 +2491,7 @@ legend("bottomleft", legend = levels(as.factor((tmp.upper.dat.growth$kingdom))),
 
 ---
 
+<br>
 
 ```{r}
 
@@ -2370,6 +2533,7 @@ summary(growth)
 
 
 ```
+
 
 ```{r, out.width='80%'}
 
