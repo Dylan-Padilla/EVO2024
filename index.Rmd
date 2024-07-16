@@ -166,9 +166,10 @@ background-image: url("imgs/bg-img.png")
 <img src = "imgs/lynch2.png" width = 650 height = 400 />
 </center>
 ]
-<center>
-Lynch et al., (2022)
-</center>
+
+
+[Lynch et al., (2022)](https://www.nature.com/articles/s41598-022-23626-7)
+
 
 ---
 
@@ -179,8 +180,10 @@ Lynch et al., (2022)
 .pull-left[
 <center>
 <img src = "imgs/marshall_2022.png" width = 500 height = 400 /><br>
-Marshall et al., (2022)
 </center>
+
+[Marshall et al., (2022)](https://www.pnas.org/doi/full/10.1073/pnas.2200713119)
+
 ]
 
 --
@@ -2599,3 +2602,7 @@ class: center, middle
 background-color: black
 
 # Questions?
+
+## These slides were made with the xaringan `r emo::ji('package')` of `r icon_style(fontawesome('r-project'), scale=1.3, fill='skyblue')`. To get the code, visit https://github.com/Dylan-Padilla/EVO2024/blob/main/index.Rmd
+
+
