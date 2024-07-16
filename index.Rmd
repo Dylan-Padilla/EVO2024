@@ -103,11 +103,10 @@ xaringanExtra::use_slide_tone()
 
 --
 
-## Description of the data
+## Methods
 
-- Phylogenetic representation
-- Sample size
-- Size range
+- Data source
+- Description of variables
 
 --
 
