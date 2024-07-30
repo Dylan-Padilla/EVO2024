@@ -90,6 +90,26 @@ xaringanExtra::use_slide_tone()
 
 ```
 
+# Acknowledgment
+
+
+.pull-left[
+<center>
+<img src = "imgs/Kerry.png" width=400 heigth=400 /><br>
+Dr Kerry Geiler-Samerotte
+</center>
+]
+
+.pull-right[
+<center>
+<img src = "imgs/Lynch.jpeg" width=350 heigth=350 /><br>
+Dr Michael Lynch
+</center>
+]
+
+
+
+---
 
 # Outline
 
@@ -1567,18 +1587,6 @@ background-size: cover
 <center>
 <font size='10'>How does temperature scale with size and growth?</font>
 <center>
-
----
-
-# Methods
-
-![](imgs/Kremer, et al., 2017.png)<br>
-
-<center>
- 
- Kremer et al., (2017)
- 
- </center>
 
 ---
 
